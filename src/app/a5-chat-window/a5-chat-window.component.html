@@ -1,0 +1,54 @@
+<div class="window-container">
+  <div id="window-banner"></div>
+  <div id="brand-section">
+    <div class="logo-container">
+      <div class="logo-circle-border">
+        <div class="logo-img-container">
+          <img src="https://cdn.glitch.com/3ea66a41-5195-4e13-9b1d-aaaac6185cde%2Fclark-2.jpg?1522975654213" alt="" class="logo-img">
+        </div>
+      </div>
+    </div>
+    <div class="brand-welcome-line">
+      <div class="chat-icon">
+        <fa-icon [icon]="faComment"></fa-icon>
+      </div>
+      <p>Chatting with the Cubs!</p>
+    </div>
+  </div>
+  <div id="message-list">
+    <div *ngFor="let message of messages">
+      <a5-chat-bubble [messageContent]="message.message" [userMessage]="message.userMessage" [name]="message.name"></a5-chat-bubble>
+    </div>
+  </div>
+  <div id="dialog-options">
+    <div class="main-menu-options" *ngIf="showMainMenuOptions">
+      <div class="main-menu-options-title">
+        <p>Here's some ideas:</p>
+      </div>
+      <div class="option-buttons-container">
+        <button value="{{option.value}}" *ngFor="let option of initialMenuOptions" (click)="chooseMainOption($event)">{{option.text}}</button>
+      </div>
+    </div>
+    <!-- <div class="main-menu-button" *ngIf="showMainMenuButton">
+      <div class="main-menu-btn-title">
+        <p>Anything else?</p>
+      </div>
+      <button value="main-menu-button" (click)="displayMainMenuOptions()">Menu</button>
+    </div> -->
+    <div class="bot-menu-options" *ngIf="showBotOptions">
+      <div class="bot-option-title">
+        <p>{{botOptionsTitle}}</p>
+      </div>
+      <div class="option-buttons-container">
+        <button *ngFor="let option of botMenuOptions" value="{{option.value}}" (click)="chooseBotOption($event)">{{option.text}}</button>
+      </div>
+    </div>
+  </div>
+  <div id="message-submission">
+    <div>
+      <input (keyup.enter)="submitMessageToBot(userMessageInput)" [(ngModel)]="userMessageInput" type="text" name="" id="user-message-input"
+        placeholder="Type here..." autocomplete="off">
+      <button type="submit" (click)="submitMessageToBot(userMessageInput)">Send</button>
+    </div>
+  </div>
+</div>

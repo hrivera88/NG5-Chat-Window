@@ -1,0 +1,297 @@
+.window-container {
+  background: #ffffff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  /*height: 500px;
+      width: 320px;*/
+  height: 100%;
+  width: 100%;
+  /*margin: 2rem auto;*/
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  font-family: "helvetica", sans-serif;
+  overflow: hidden;
+}
+#window-banner {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  text-align: center;
+  border-bottom: 1px solid #0e3386;
+  font-size: 14px;
+  padding: 0.25rem;
+  color: #666;
+  height: 65px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: -webkit-linear-gradient(
+      rgba(0, 43, 92, 0.3),
+      rgba(0, 43, 92, 0.3)
+    ),
+    url("https://cdn.glitch.com/3ea66a41-5195-4e13-9b1d-aaaac6185cde%2Fwrig-field-bg.png?1522975739299");
+  background: -webkit-linear-gradient(
+      rgba(0, 43, 92, 0.3),
+      rgba(0, 43, 92, 0.3)
+    ),
+    url("https://cdn.glitch.com/3ea66a41-5195-4e13-9b1d-aaaac6185cde%2Fwrig-field-bg.png?1522975739299");
+  background: linear-gradient(rgba(0, 43, 92, 0.3), rgba(0, 43, 92, 0.3)),
+    url("https://cdn.glitch.com/3ea66a41-5195-4e13-9b1d-aaaac6185cde%2Fwrig-field-bg.png?1522975739299");
+}
+#brand-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #f8f8f8;
+  position: relative;
+  height: 45px;
+  min-height: 45px;
+  box-shadow: 0px 6px 4px -6px rgba(0, 0, 0, 0.26);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.logo-container {
+  position: absolute;
+  top: -40px;
+  left: 30px;
+}
+.logo-circle-border {
+  height: 64px;
+  width: 64px;
+  border-radius: 36px;
+  border: 2px solid #ef5350;
+}
+.logo-img-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 59px;
+  overflow: hidden;
+}
+.logo-img-container img {
+  width: 100%;
+  height: 100%;
+}
+.brand-welcome-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.chat-icon {
+  margin-right: 7px;
+  margin-bottom: 9px;
+  color: #ef5350;
+}
+.brand-welcome-line p {
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.45px;
+  color: #9c9c9c;
+}
+#message-list {
+  overflow: auto;
+  padding: 12px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 20%;
+  flex: 1 1 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+}
+.main-menu-options,
+.main-menu-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px;
+  /* Lets it scroll lazy */
+}
+.bot-menu-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 12px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+}
+#dialog-options button {
+  display: block;
+  border: 1px solid #ef5350;
+  color: #ef5350;
+  border-radius: 16px;
+  padding: 0.25rem 1rem;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 6px;
+  background: #fff;
+  margin-bottom: 6px;
+}
+#dialog-options button:last-child {
+  margin-right: 0;
+}
+#message-submission {
+  border-top: 1px solid #f8f8f8;
+  padding: 0.52rem 0.25rem;
+}
+#message-submission div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0.25rem;
+}
+.bot-option-title,
+.main-menu-options-title,
+.main-menu-btn-title {
+  font-size: 14px;
+  color: #9c9c9c;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+#message-submission input[type="text"] {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-size: 0.75rem;
+  outline: none;
+  border: none;
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  color: #9c9c9c;
+}
+#message-submission button {
+  width: 50px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #ef5350;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.25px;
+  font-weight: bold;
+}
+.option-buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+}
+.cllass {
+  content: "";
+  height: 36px;
+}
+/* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
+.typing-indicator {
+  display: table;
+  margin: 0 auto;
+  position: relative;
+}
+.typing-indicator span {
+  height: 5px;
+  width: 5px;
+  float: left;
+  margin: 0 1px;
+  background-color: #fff;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+}
+.typing-indicator span:nth-of-type(1) {
+  -webkit-animation: 1s blink infinite 0.3333s;
+  animation: 1s blink infinite 0.3333s;
+}
+.typing-indicator span:nth-of-type(2) {
+  -webkit-animation: 1s blink infinite 0.6666s;
+  animation: 1s blink infinite 0.6666s;
+}
+.typing-indicator span:nth-of-type(3) {
+  -webkit-animation: 1s blink infinite 0.9999s;
+  animation: 1s blink infinite 0.9999s;
+}
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  }
+}
