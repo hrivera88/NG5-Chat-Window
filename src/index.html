@@ -17,5 +17,13 @@
   <app-root></app-root>
   <script src="assets/js/aws-lex-audio.min.js"></script>
 </body>
+<script>
+  document.addEventListener('touchmove', function (event) {
+    event = event.originalEvent || event;
+    if (event.scale !== 1 && event.scale !== undefined) {
+      event.preventDefault();
+    }
+  }, false);
+</script>
 
 </html>
