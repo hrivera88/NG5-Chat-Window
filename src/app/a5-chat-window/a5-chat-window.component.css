@@ -107,9 +107,9 @@
   -ms-flex-align: center;
   align-items: center;
 }
-.chat-icon {
+.chat-icon fa-icon.ng-fa-icon {
   margin-right: 7px;
-  margin-bottom: 9px;
+  margin-bottom: 0;
   color: #ef5350;
 }
 .brand-welcome-line p {
@@ -232,6 +232,13 @@
   letter-spacing: 0.25px;
   font-weight: bold;
 }
+fa-icon.ng-fa-icon {
+  color: #9c9c9c;
+  cursor: pointer;
+}
+fa-icon.ng-fa-icon.recording {
+  color: #ef5350;
+}
 .option-buttons-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -247,11 +254,9 @@
   -ms-flex-pack: center;
   justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
 }
-.cllass {
-  content: "";
-  height: 36px;
-}
+
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
 .typing-indicator {
   display: table;
