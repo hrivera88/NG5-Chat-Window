@@ -24,4 +24,10 @@ body {
 .message iframe {
   border: 0;
   margin: 5px 0;
+  width: 100%;
+  height: auto;
+}
+.message img {
+  align-self: center;
+  margin-bottom: 10px;
 }

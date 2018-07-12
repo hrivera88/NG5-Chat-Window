@@ -18,7 +18,8 @@
   color: #fff;
   border-radius: 5px;
   width: auto;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   max-width: 75%;
   font-family: "Lato", sans-serif;
 }
@@ -31,6 +32,8 @@
 }
 .message iframe {
   border: 0;
+  width: 100%;
+  height: auto;
 }
 .message.user {
   background: #ef5350;
