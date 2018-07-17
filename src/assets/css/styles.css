@@ -30,4 +30,5 @@ body {
 .message img {
   align-self: center;
   margin-bottom: 10px;
+  width: 100%;
 }
