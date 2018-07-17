@@ -1,60 +1,34 @@
-import { Component, OnInit } from "@angular/core";
-import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { faComment, faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { Message } from "./message";
 import { Option } from "./option";
 import * as AWS from "aws-sdk";
 import * as _ from "lodash";
+import * as RecordRTC from "recordrtc";
+import * as LexAudio from "../../assets/js/aws-lex-audio.min.js";
 
 @Component({
   selector: "a5-chat-window",
   templateUrl: "./a5-chat-window.component.html",
   styleUrls: ["./a5-chat-window.component.css"]
 })
-export class A5ChatWindowComponent implements OnInit {
+export class A5ChatWindowComponent implements OnInit, AfterViewInit {
+  @ViewChild("testAudio") audio;
   lexRuntime: any;
   lexUserID = "Halbot" + Date.now();
   botOptionsTitle: string;
-  initialMenuOptions: Option[] = [
-    {
-      text: "Game Highlights",
-      value: "highlights"
-    },
-    {
-      text: "Player Stats",
-      value: "stats"
-    },
-    {
-      text: "Wrigley Field Map & Parking",
-      value: "park"
-    },
-    {
-      text: "Where's The Hotdog",
-      value: "food"
-    },
-    {
-      text: "Buy Tickets",
-      value: "tickets"
-    }
-  ];
   botMenuOptions: Option[] = [];
   faComment = faComment;
-  greetingMessage = "How can we help you?";
+  faMicrophone = faMicrophone;
   userMessageInput: string;
   showMainMenuOptions = true;
   showMainMenuButton = false;
   showBotOptions = false;
-  messages: Message[] = [
-    {
-      userMessage: false,
-      name: "",
-      message: this.greetingMessage
-    },
-    {
-      userMessage: true,
-      name: "Dustin",
-      message: "Hello"
-    }
-  ];
+  messages: Message[] = [];
+  isRecording = false;
+  private stream: MediaStream;
+  private recordRTC: any;
+  audioControl: any;
 
   constructor() {
     AWS.config.region = "us-east-1";
@@ -64,12 +38,97 @@ export class A5ChatWindowComponent implements OnInit {
     this.lexRuntime = new AWS.LexRuntime();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.sendTextMessageToBot("menu");
+  }
 
-  displayMainMenuOptions() {
-    this.showResponse(false, this.greetingMessage);
-    this.showMainMenuButton = false;
-    this.showMainMenuOptions = true;
+  toggleControls() {
+    let audio: HTMLAudioElement = this.audio.nativeElement;
+    audio.muted = !audio.muted;
+    audio.controls = !audio.controls;
+    audio.autoplay = !audio.autoplay;
+  }
+
+  successCallback(stream: MediaStream) {
+    let options = {
+      mimeType: "audio/wav",
+      type: "audio",
+      desiredSampRate: 16000
+    };
+    this.stream = stream;
+    this.recordRTC = RecordRTC(stream, options);
+    this.recordRTC.startRecording();
+    let audio: HTMLAudioElement = this.audio.nativeElement;
+    audio.src = window.URL.createObjectURL(stream);
+    this.toggleControls();
+  }
+
+  errorCallback() {}
+
+  processAudio(audioWebURL) {
+    let recordRTC = this.recordRTC;
+    console.log("wahats up", recordRTC);
+    let audio: HTMLAudioElement = this.audio.nativeElement;
+    audio.src = audioWebURL;
+    this.toggleControls();
+    let recordedBlob = recordRTC.getBlob();
+    this.sendSpeechMessageToBot(recordedBlob);
+  }
+
+  sendSpeechMessageToBot(stream: any) {
+    console.log("Sending speech audio");
+    let params = {
+      botAlias: "$LATEST",
+      botName: "CubsBot",
+      contentType: "audio/x-l16; sample-rate=16000; channel-count=1",
+      userId: this.lexUserID,
+      accept: "audio/pcm",
+      inputStream: stream
+    };
+    this.lexRuntime.postContent(params, function(err, data) {
+      if (err) {
+        console.log("yoo goof, ", err);
+      } else {
+        console.log("RESPONSE BOT :", data);
+      }
+    });
+  }
+
+  startRecording() {
+    console.log;
+    let mediaConstraints = {
+      audio: true
+    };
+    navigator.mediaDevices
+      .getUserMedia(mediaConstraints)
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+  }
+
+  stopRecording() {
+    console.log("stopped");
+    let recordRTC = this.recordRTC;
+    recordRTC.stopRecording(this.processAudio.bind(this));
+    let stream = this.stream;
+    stream.getAudioTracks().forEach(track => track.stop());
+  }
+
+  speakToBot() {
+    if (this.isRecording) {
+      console.log("Im stopping");
+      this.isRecording = false;
+      this.stopRecording();
+    } else {
+      console.log("Im starting");
+      this.isRecording = true;
+      this.startRecording();
+    }
+  }
+
+  ngAfterViewInit() {
+    let audio: HTMLAudioElement = this.audio.nativeElement;
+    audio.muted = false;
+    audio.controls = true;
+    audio.autoplay = false;
   }
 
   showResponse(isUserMessage: boolean, message: string) {
@@ -141,6 +200,7 @@ export class A5ChatWindowComponent implements OnInit {
 
   submitMessageToBot(message: any) {
     let usersMessage = message;
+    this.showResponse(true, usersMessage);
     this.sendTextMessageToBot(usersMessage);
   }
 

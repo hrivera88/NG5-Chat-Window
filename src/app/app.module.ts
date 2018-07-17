@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from "./app.component";
 import { A5ChatWindowComponent } from "./a5-chat-window/a5-chat-window.component";
@@ -16,7 +17,7 @@ import { HtmlSanitizerPipe } from "./html-sanitizer.pipe";
     A5ChatBubbleComponent,
     HtmlSanitizerPipe
   ],
-  imports: [BrowserModule, FontAwesomeModule, FormsModule],
+  imports: [BrowserModule, FontAwesomeModule, FormsModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
